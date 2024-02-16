@@ -1,0 +1,24 @@
+SELECT t1.Order_ID,t1.Amount,t1.Profit,t1.Quantity,t1.Category,t1.Sub_Category,t2.Customer_Name,t3.Target
+FROM use4_sales_his_ds.Order_detail_his_tb AS t1
+JOIN use4_sales_his_ds.orders_his_tb AS t2 ON t1.Order_ID = t2.Order_ID
+JOIN use4_sales_his_ds.sales_target_his_tb AS t3 ON t2.Order_ID = t3.Order_ID;
+
+********************************************************
+
+## Encryption by using SHA512, SHA256, MD5
+
+###if datatype int we have to cast concert into string and the encript it 
+
+bq query "select Order_ID,sha1(Order_ID as string) as Order_ID2 from use4_sales_his_ds.sales_target_his_tb"(only string)
+Error in query string: Error processing job 
+
+                                         (or)
+										 
+
+##  for string directly we give columns_name
+
+SELECT 
+  Order_ID,
+  sha1(Order_ID) AS Order_ID2 
+FROM use4_sales_stage.orders_tb;    
+
